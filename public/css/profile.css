@@ -1,0 +1,420 @@
+/* ============================================================
+   profile.css  —  Hafidh | About Me Page
+   Styles for the 1-Page Compact Glamour About Me page.
+   ============================================================ */
+
+/* ── Google Fonts ───────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+/* ── CSS Custom Properties ──────────────────────────────────── */
+:root {
+    --bg-deep:       #060818;
+    --clr-indigo:    #818cf8;
+    --clr-purple:    #c084fc;
+    --clr-pink:      #f472b6;
+    --clr-cyan:      #67e8f9;
+    --clr-slate-300: #cbd5e1;
+    --clr-slate-400: #94a3b8;
+    --clr-slate-600: #475569;
+    --clr-emerald:   #22c55e;
+
+    --glass-bg:      rgba(255, 255, 255, 0.05);
+    --glass-border:  rgba(255, 255, 255, 0.10);
+    --glass-blur:    blur(24px) saturate(180%);
+
+    --radius-card:   1.5rem;  /* 24px */
+    --transition:    0.25s ease;
+}
+
+/* ── Reset & Base ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin:     0;
+    padding:    0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:      'Inter', sans-serif;
+    background-color: var(--bg-deep);
+    min-height:       100vh;
+    overflow-x:       hidden;
+    color:            var(--clr-slate-300);
+}
+
+/* ── Particles Canvas ───────────────────────────────────────── */
+#tsparticles {
+    position:       fixed;
+    inset:          0;
+    z-index:        0;
+    pointer-events: none;
+}
+
+/* ── Ambient Glow Blobs ─────────────────────────────────────── */
+.glow-blob {
+    position:       fixed;
+    border-radius:  50%;
+    filter:         blur(120px);
+    pointer-events: none;
+    z-index:        0;
+}
+
+.glow-blob-1 {
+    width:      500px;
+    height:     500px;
+    top:        -120px;
+    left:       -120px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
+    animation:  float 9s ease-in-out infinite;
+}
+
+.glow-blob-2 {
+    width:      420px;
+    height:     420px;
+    bottom:     -100px;
+    right:      -80px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.30) 0%, transparent 70%);
+    animation:  float 11s ease-in-out infinite reverse;
+}
+
+.glow-blob-3 {
+    width:      300px;
+    height:     300px;
+    top:        50%;
+    left:       50%;
+    transform:  translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    animation:  float 7s ease-in-out infinite 2s;
+}
+
+/* ── Glassmorphism Card ─────────────────────────────────────── */
+.glass-card {
+    background:             var(--glass-bg);
+    backdrop-filter:        var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border:                 1px solid var(--glass-border);
+    border-radius:          var(--radius-card);
+    box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 1px 0 rgba(255, 255, 255, 0.15) inset;
+    overflow: hidden;
+}
+
+/* ── Top Accent Bar ─────────────────────────────────────────── */
+.card-accent-bar {
+    height:     4px;
+    width:      100%;
+    background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+}
+
+/* ── Card Body Padding ──────────────────────────────────────── */
+.card-body {
+    padding: 2rem;
+}
+
+/* ── Avatar Wrapper ─────────────────────────────────────────── */
+.avatar-section {
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+    gap:            0.75rem;
+    margin-bottom:  1.5rem;
+}
+
+/* ── Spinning Conic-Gradient Ring ───────────────────────────── */
+.avatar-ring {
+    background: conic-gradient(
+        from 180deg,
+        #6366f1, #a855f7, #ec4899, #f59e0b, #6366f1
+    );
+    animation:     ring-spin 5s linear infinite;
+    border-radius: 50%;
+    padding:       3px;
+    flex-shrink:   0;
+}
+
+.avatar-inner {
+    background:    var(--bg-deep);
+    border-radius: 50%;
+    padding:       3px;
+}
+
+/* ── Initials Placeholder ───────────────────────────────────── */
+.avatar-placeholder {
+    width:         96px;
+    height:        96px;
+    border-radius: 50%;
+    background:    linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    display:       flex;
+    align-items:   center;
+    justify-content: center;
+    font-family:   'Space Grotesk', sans-serif;
+    font-size:     2.25rem;
+    font-weight:   700;
+    color:         #fff;
+    letter-spacing: -1px;
+    user-select:   none;
+}
+
+/* Use a real photo: swap <.avatar-placeholder> with <img>
+   and apply this class for consistent sizing & shape. */
+.avatar-photo {
+    width:         96px;
+    height:        96px;
+    border-radius: 50%;
+    object-fit:    cover;
+    display:       block;
+}
+
+/* ── Online Status Badge ────────────────────────────────────── */
+.status-badge {
+    display:     flex;
+    align-items: center;
+    gap:         0.5rem;
+}
+
+.status-dot {
+    width:         10px;
+    height:        10px;
+    background:    var(--clr-emerald);
+    border-radius: 50%;
+    border:        2px solid var(--bg-deep);
+    animation:     pulse-green 2s infinite;
+}
+
+.status-label {
+    font-size:   0.72rem;
+    font-weight: 500;
+    color:       var(--clr-emerald);
+    letter-spacing: 0.04em;
+}
+
+/* ── Name & Title ───────────────────────────────────────────── */
+.profile-name-section {
+    text-align:    center;
+    margin-bottom: 1.25rem;
+}
+
+.profile-name {
+    font-family:    'Space Grotesk', sans-serif;
+    font-size:      1.875rem; /* text-3xl */
+    font-weight:    700;
+    letter-spacing: -0.02em;
+    line-height:    1.1;
+    margin-bottom:  0.25rem;
+
+    /* Shimmer gradient animation */
+    background: linear-gradient(
+        90deg,
+        var(--clr-indigo)  0%,
+        var(--clr-purple)  25%,
+        var(--clr-pink)    50%,
+        var(--clr-purple)  75%,
+        var(--clr-indigo)  100%
+    );
+    background-size:          200% auto;
+    -webkit-background-clip:  text;
+    background-clip:          text;
+    -webkit-text-fill-color:  transparent;
+    animation:                shimmer 3s linear infinite;
+}
+
+.profile-title {
+    font-size:   0.875rem;
+    font-weight: 500;
+    color:       var(--clr-slate-300);
+    line-height: 1.4;
+}
+
+.profile-title-sub {
+    color: var(--clr-slate-400);
+}
+
+/* ── Glass Divider ──────────────────────────────────────────── */
+.glass-divider {
+    height:     1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
+    margin:     0 0 1.25rem;
+}
+
+/* ── Bio Text ───────────────────────────────────────────────── */
+.profile-bio {
+    font-size:     0.8rem;
+    line-height:   1.7;
+    text-align:    center;
+    color:         var(--clr-slate-400);
+    margin-bottom: 1.5rem;
+    padding:       0 0.25rem;
+}
+
+.profile-bio .highlight {
+    color:       var(--clr-purple);
+    font-weight: 500;
+}
+
+/* ── Tech Stack Chips ───────────────────────────────────────── */
+.tech-stack {
+    display:         flex;
+    flex-wrap:       wrap;
+    justify-content: center;
+    gap:             0.5rem;
+    margin-bottom:   1.75rem;
+}
+
+.tech-chip {
+    display:       inline-flex;
+    align-items:   center;
+    gap:           5px;
+    padding:       4px 12px;
+    border-radius: 9999px;
+    background:    rgba(255, 255, 255, 0.06);
+    border:        1px solid rgba(255, 255, 255, 0.12);
+    font-size:     0.72rem;
+    font-weight:   500;
+    color:         #c4b5fd;
+    letter-spacing: 0.02em;
+    transition:    all var(--transition);
+    cursor:        default;
+    white-space:   nowrap;
+}
+
+.tech-chip:hover {
+    background:  rgba(139, 92, 246, 0.25);
+    border-color: rgba(139, 92, 246, 0.5);
+    color:       #fff;
+    transform:   translateY(-2px);
+    box-shadow:  0 4px 16px rgba(139, 92, 246, 0.35);
+}
+
+/* ── Social / Contact Buttons ───────────────────────────────── */
+.social-links {
+    display:         flex;
+    flex-wrap:       wrap;
+    justify-content: center;
+    gap:             0.75rem;
+}
+
+.social-btn {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    gap:             7px;
+    padding:         8px 18px;
+    border-radius:   9999px;
+    background:      rgba(255, 255, 255, 0.06);
+    border:          1px solid rgba(255, 255, 255, 0.12);
+    color:           #e2e8f0;
+    font-size:       0.82rem;
+    font-weight:     500;
+    text-decoration: none;
+    transition:      all var(--transition);
+    white-space:     nowrap;
+}
+
+.social-btn:hover {
+    transform:  translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.social-btn--github:hover {
+    background:  rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.social-btn--email:hover {
+    background:  rgba(236, 72, 153, 0.18);
+    border-color: rgba(236, 72, 153, 0.45);
+    color:       #f9a8d4;
+}
+
+.social-btn--linkedin:hover {
+    background:  rgba(99, 102, 241, 0.20);
+    border-color: rgba(99, 102, 241, 0.45);
+    color:       #a5b4fc;
+}
+
+/* ── Card Footer ────────────────────────────────────────────── */
+.card-footer {
+    padding:    0.25rem 2rem 1.25rem;
+    text-align: center;
+}
+
+.card-footer p {
+    font-size:      0.7rem;
+    color:          var(--clr-slate-600);
+    letter-spacing: 0.08em;
+}
+
+/* ── Page Layout ────────────────────────────────────────────── */
+.page-center {
+    position:        relative;
+    z-index:         10;
+    min-height:      100vh;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    padding:         1rem;
+}
+
+.profile-card-wrapper {
+    width:     100%;
+    max-width: 24rem; /* ~384px */
+}
+
+/* ── Keyframe Animations ────────────────────────────────────── */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+}
+
+@keyframes ring-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+}
+
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0   rgba(34, 197, 94, 0.6); }
+    50%       { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);   }
+}
+
+@keyframes fadeInUp {
+    0%   { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0);     }
+}
+
+/* ── Card Entrance Animation ────────────────────────────────── */
+.card-enter {
+    animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Responsive Adjustments ─────────────────────────────────── */
+@media (max-width: 480px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .profile-name {
+        font-size: 1.625rem;
+    }
+
+    .avatar-placeholder {
+        width:     80px;
+        height:    80px;
+        font-size: 1.875rem;
+    }
+
+    .avatar-photo {
+        width:  80px;
+        height: 80px;
+    }
+}
